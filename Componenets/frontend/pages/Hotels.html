@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <link rel="stylesheet" href="/Componenets/frontend/styles/Hotels.css">
+    <link class="favi" rel="shortcut icon" href="/components/images/Favicom1.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <main>
+        <section class="sec1">
+            <div>
+                <nav class="nav1">
+                    <ul>
+                        <li>Nairobi</li>
+                        <li>Mombasa</li>
+                        <li>Kisumu</li>
+                        <li>Zanzibar</li>
+                        <li>Kampala</li>
+                    </ul>
+                </nav>
+            </div>
+        </section>
+
+        <section class="sec2">
+            <h3 class="p1">Find the Best Hotels</h3>
+            <br><br><br><br><br><br><br><br><br>
+            <h3>Why book with us</h3>
+            <p>Choose from a wide range of hotels, from luxurious  <br>
+               resorts to budget-friendly options.</p>
+        </section>
+
+        <section id="hotels-section">
+            <!-- Hotels will be dynamically inserted here -->
+        </section>
+
+        <section class="contact-section">
+            <footer>
+                <div class="footer-container">
+                    <div class="footer-section customer-support">
+                        <h4>Customer Support</h4>
+                        <ul>
+                            <li><a href="/help-center.html">Help Center</a></li>
+                            <li><a href="/live-chat.html">Live Chat</a></li>
+                            <li><a href="/booking-support.html">Booking Support</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section company-info">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="/blog.html">Blog</a></li>
+                            <li><a href="/careers.html">Careers</a></li>
+                            <li><a href="/press.html">Press</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section subscription">
+                        <h4>Subscribe to our Newsletter</h4>
+                        <form action="/subscribe" method="post">
+                            <input type="email" name="email" placeholder="Enter your email" required>
+                            <button type="submit">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="footer-section follow-us">
+                        <h4>Follow Us</h4>
+                        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 TripTrove, Inc. All rights reserved.</p>
+                    <p><a href="/accessibility.html">Accessibility Statement</a></p>
+                </div>
+            </footer>
+        </section>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('fetch_hotels.php')
+                .then(response => response.json())
+                .then(data => {
+                    const hotelsSection = document.getElementById('hotels-section');
+                    data.forEach(hotel => {
+                        const hotelDiv = document.createElement('div');
+                        hotelDiv.classList.add('hotel');
+                        hotelDiv.innerHTML = `
+                            <h4>${hotel.name}</h4>
+                            <p>Location: ${hotel.location}</p>
+                            <p>Services: ${hotel.services}</p>
+                            <p>Description: ${hotel.description}</p>
+                            <p>Price: ${hotel.price}</p>
+                            <img src="${hotel.image_path}" alt="${hotel.name}">
+                            <button onclick="showHotelDetails('${hotel.name}', '${hotel.location}', '${hotel.services}', '${hotel.description}', '${hotel.price}', '${hotel.image_path}')">View Details</button>
+                        `;
+                        hotelsSection.appendChild(hotelDiv);
+                    });
+                });
+        });
+
+        function showHotelDetails(name, location, services, description, price, imagePath) {
+            // Implement modal functionality to show hotel details
+        }
+
+        function closeHotelDetails() {
+            // Implement modal close functionality
+        }
+
+        function bookHotel() {
+            alert('Booking functionality to be implemented.');
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('hotelModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css" />
+    <link
+      rel="shortcut icon"
+      href="images/places/Favicom1.jpg"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <div class="container">
+      <!-- Add Flight Form -->
+      <div class="form-section">
+        <h2>Add Flight</h2>
+        <form
+          id="addFlightForm"
+          method="POST"
+          enctype="multipart/form-data"
+          action="add_flight.php"
+        >
+          <input
+            type="text"
+            name="flight_name"
+            placeholder="Flight Name"
+            required
+          />
+          <input type="text" name="origin" placeholder="Origin" required />
+          <input
+            type="text"
+            name="destination"
+            placeholder="Destination"
+            required
+          />
+          <input type="number" name="price" placeholder="Price" required />
+          <input
+            type="date"
+            name="travel_date"
+            placeholder="Travel Date"
+            required
+          />
+          <select name="class" required>
+            <option value="business">Business</option>
+            <option value="economy">Economy</option>
+          </select>
+          <input type="file" name="image" required />
+          <button type="submit">Add Flight</button>
+        </form>
+      </div>
+
+      <!-- Add Hotel Form -->
+      <div class="form-section">
+        <h2>Add Hotel</h2>
+        <form
+          id="addHotelForm"
+          method="POST"
+          enctype="multipart/form-data"
+          action="add_hotel.php"
+        >
+          <input type="text" name="name" placeholder="Hotel Name" required />
+          <input type="text" name="location" placeholder="Location" required />
+          <textarea name="services" placeholder="Services" required></textarea>
+          <textarea
+            name="description"
+            placeholder="Description"
+            required
+          ></textarea>
+          <input type="file" name="image" required />
+          <button type="submit">Add Hotel</button>
+        </form>
+      </div>
+
+      <!-- Add Tourist Site Form -->
+      <div class="form-section">
+        <h2>Add Tourist Site</h2>
+        <form
+          id="addTouristSiteForm"
+          method="POST"
+          enctype="multipart/form-data"
+          action="add_tourist_site.php"
+        >
+          <input type="text" name="name" placeholder="Site Name" required />
+          <input type="text" name="location" placeholder="Location" required />
+          <textarea
+            name="description"
+            placeholder="Description"
+            required
+          ></textarea>
+          <input type="file" name="image" required />
+          <button type="submit">Add Tourist Site</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="data-section">
+      <!-- Manage Flights -->
+      <h2>Manage Flights</h2>
+      <button onclick="addFlight()">Add Flight</button>
+      <table id="flightsTable">
+        <thead>
+          <tr>
+            <th>Flight Name</th>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Price</th>
+            <th>Travel Date</th>
+            <th>Class</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Flights data will be loaded here dynamically -->
+        </tbody>
+      </table>
+
+      <!-- Manage Hotels -->
+      <h2>Manage Hotels</h2>
+      <button onclick="addHotel()">Add Hotel</button>
+      <table id="hotelsTable">
+        <thead>
+          <tr>
+            <th>Hotel Name</th>
+            <th>Location</th>
+            <th>Services</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Hotels data will be loaded here dynamically -->
+        </tbody>
+      </table>
+
+      <!-- Manage Tourist Sites -->
+      <h2>Manage Tourist Sites</h2>
+      <button onclick="addTouristSite()">Add Tourist Site</button>
+      <table id="touristSitesTable">
+        <thead>
+          <tr>
+            <th>Site Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Tourist Sites data will be loaded here dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      // Function to edit an entry (flight, hotel, or tourist site)
+      function editEntry(type, id) {
+        // Fetch the data of the entry to be edited
+        fetch(`fetch_${type}.php?id=${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            let form;
+            if (type === "flight") {
+              form = document.getElementById("addFlightForm");
+            } else if (type === "hotel") {
+              form = document.getElementById("addHotelForm");
+            } else if (type === "tourist_site") {
+              form = document.getElementById("addTouristSiteForm");
+            }
+
+            // Populate the form fields with the fetched data
+            for (let key in data) {
+              if (form.elements[key]) {
+                form.elements[key].value = data[key];
+              }
+            }
+            form.elements["action"].value = "edit";
+            form.elements["id"].value = id;
+
+            // Optionally, show the form if it's hidden
+            // Example: form.style.display = 'block';
+          });
+      }
+
+      // Function to delete an entry (flight, hotel, or tourist site)
+      function deleteEntry(type, id) {
+        let formData = new FormData();
+        formData.append("type", type);
+        formData.append("action", "delete");
+        formData.append("id", id);
+
+        fetch("manage_entries.php", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            console.log(data);
+            // Refresh data or update UI accordingly after deletion
+            // Example: Reload the table data or remove the deleted row from UI
+          });
+      }
+    </script>
+  </body>
+</html>

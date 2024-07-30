@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripTrove</title>
+    <link
+      class="favi"
+      rel="shortcut icon"
+      href="images/places/Favicom1.jpg"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo"><a href="#">TripTrove</a></div>
+      <div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="about.html">About us</a></li>
+          <li>
+            <a href="contact-us.html">Contact us</a>
+          </li>
+          <li><a href="login.html">Log in</a></li>
+          <li><a href="signup.html">Sign up</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main section -->
+    <main id="main">
+      <section class="one">
+        <div class="gridone">
+          <div class="columns">
+            <div class="text">
+              <a href="Flights.html">Check on flights</a>
+            </div>
+            <div>
+              <a href="/">
+                <img src="images/places/Flight.jpg" alt="Flight" id="img1" />
+              </a>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="text">
+              <a href="Hotels.html">Check on Hotels</a>
+            </div>
+            <div>
+              <a href="Flights.html">
+                <img src="images/places/Hotel.jpg" alt="Hotel" id="img2" />
+              </a>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="text">
+              <a href="Tourist-sites.html">Check on Tourist sites</a>
+            </div>
+            <div>
+              <a href="Tourist-sites.html">
+                <img
+                  src="images/places/Waterfall.jpg"
+                  alt="Waterfall"
+                  id="img3"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="contact-section">
+        <footer>
+          <div class="footer-container">
+            <div class="footer-section customer-support">
+              <h4>Customer Support</h4>
+              <ul>
+                <li><a href="help-center.html">Help Center</a></li>
+              </ul>
+            </div>
+            <div class="footer-section company-info">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="careers.html">Careers</a></li>
+                <li><a href="press.html">Press</a></li>
+              </ul>
+            </div>
+            <div class="footer-section subscription">
+              <h4>Subscribe to our Newsletter</h4>
+              <form id="dataForm" action="server-script.php" method="post">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
+                  required
+                />
+                <button type="submit">Subscribe</button>
+              </form>
+              <div id="responseMessage"></div>
+            </div>
+            <div class="footer-section follow-us">
+              <h4>Follow Us</h4>
+              <a href="https://www.facebook.com" target="_blank"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="https://www.twitter.com" target="_blank"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://www.instagram.com" target="_blank"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://www.linkedin.com" target="_blank"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2024 TripTrove, Inc. All rights reserved.</p>
+            <p><a href="accessibility.html">Accessibility Statement</a></p>
+          </div>
+        </footer>
+      </section>
+    </main>
+
+    <script>
+      document
+        .getElementById("dataForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(this);
+
+          fetch("server-script.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.text())
+            .then((data) => {
+              document.getElementById("responseMessage").innerText =
+                "Data sent successfully: " + data;
+              fetchDataFromServer();
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+
+      function fetchDataFromServer() {
+        fetch("server-script.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const dataDisplay = document.getElementById("dataDisplay");
+            dataDisplay.innerHTML = JSON.stringify(data, null, 2);
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      // Fetch data when the page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        fetchDataFromServer();
+      });
+    </script>
+  </body>
+</html>

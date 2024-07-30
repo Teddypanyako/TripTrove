@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      class="favi"
+      rel="shortcut icon"
+      href="images/places/Favicom1.jpg"
+      type="image/x-icon"
+    />
+    <title>Make-payment</title>
+    <link rel="stylesheet" href="css/make-payment.css" />
+  </head>
+  <body>
+    <main>
+      <section class="payment-section">
+        <h3>Online Payment Form</h3>
+        <form
+          id="paymentForm"
+          action="process_payment.php"
+          method="post"
+        >
+          <label for="fullName">Full Name:</label><br />
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+          /><br /><br />
+
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" required /><br /><br />
+
+          <label for="cardNumber">Card Number:</label><br />
+          <input
+            type="text"
+            id="cardNumber"
+            name="cardNumber"
+            required
+          /><br /><br />
+
+          <label for="expDate">Expiry Date:</label><br />
+          <input
+            type="month"
+            id="expDate"
+            name="expDate"
+            required
+          /><br /><br />
+
+          <label for="cvv">CVV:</label><br />
+          <input type="text" id="cvv" name="cvv" required /><br /><br />
+
+          <label for="amount">Amount:</label><br />
+          <input
+            type="number"
+            id="amount"
+            name="amount"
+            step="0.01"
+            required
+          /><br /><br />
+
+          <button type="submit">Submit Payment</button>
+        </form>
+        <div id="responseMessage"></div>
+      </section>
+    </main>
+
+    <script>
+      document
+        .getElementById("paymentForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+
+          // Get form data
+          const formData = new FormData(this);
+
+          // Send form data to the server
+          fetch("backend/process_payment.php", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("responseMessage").innerText =
+                data.message;
+              if (data.status === "success") {
+                document.getElementById("paymentForm").reset();
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
+    </script>
+  </body>
+</html>

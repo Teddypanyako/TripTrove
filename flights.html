@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flights</title>
-    <link rel="stylesheet" href="css/Flights .css" />
+    <link rel="stylesheet" href="css/flights.css" />
     <link
       class="favi"
       rel="shortcut icon"
@@ -19,25 +19,21 @@
   <body>
     <main>
       <section class="sec1">
-        <div>
-          <nav class="nav1">
-            <ul>
-              <li>Kenya Airways</li>
-              <li>Fly Emirates</li>
-              <li>Qatar Airways</li>
-            </ul>
-          </nav>
-        </div>
+        <nav class="nav1">
+          <ul>
+            <li>Kenya Airways</li>
+            <li>Fly Emirates</li>
+            <li>Qatar Airways</li>
+          </ul>
+        </nav>
       </section>
 
       <section class="sec2">
         <h3 class="p1">Find the Best Flights</h3>
-        <br /><br /><br /><br /><br /><br /><br /><br /><br />
-        <h3>Why book with us</h3>
         <p>
           Experience the ease of booking via us, with the well-designed user
           interface.<br />
-          24/7 customer support service to step in case of any queries.
+          24/7 customer support service to assist with any queries.
         </p>
       </section>
 
@@ -66,7 +62,7 @@
             </div>
             <div class="footer-section subscription">
               <h4>Subscribe to our Newsletter</h4>
-              <form action="subscribe" method="post">
+              <form action="subscribe.php" method="post">
                 <input
                   type="email"
                   name="email"
@@ -99,6 +95,21 @@
         </footer>
       </section>
     </main>
+
+    <!-- Modal for displaying flight details -->
+    <div id="flightModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeFlightDetails()">&times;</span>
+        <h4 id="modal-travel-date"></h4>
+        <p id="modal-departure-from"></p>
+        <p id="modal-destination"></p>
+        <p id="modal-class"></p>
+        <p id="modal-business-class-price"></p>
+        <p id="modal-economy-class-price"></p>
+        <img id="modal-image" src="" alt="Flight Image" />
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         fetch("fetch_flights.php")
@@ -120,7 +131,8 @@
                         `;
               flightsSection.appendChild(flightDiv);
             });
-          });
+          })
+          .catch((error) => console.error("Error fetching flights:", error));
       });
 
       function showFlightDetails(
@@ -132,20 +144,38 @@
         economyClassPrice,
         imagePath
       ) {
-        // Implement modal functionality to show flight details
+        document.getElementById(
+          "modal-travel-date"
+        ).textContent = `Travel Date: ${travelDate}`;
+        document.getElementById(
+          "modal-departure-from"
+        ).textContent = `Departure From: ${departureFrom}`;
+        document.getElementById(
+          "modal-destination"
+        ).textContent = `Destination: ${destination}`;
+        document.getElementById(
+          "modal-class"
+        ).textContent = `Class: ${flightClass}`;
+        document.getElementById(
+          "modal-business-class-price"
+        ).textContent = `Business Class Price: ${businessClassPrice}`;
+        document.getElementById(
+          "modal-economy-class-price"
+        ).textContent = `Economy Class Price: ${economyClassPrice}`;
+        document.getElementById("modal-image").src = imagePath;
+
+        const modal = document.getElementById("flightModal");
+        modal.style.display = "block";
       }
 
       function closeFlightDetails() {
-        // Implement modal close functionality
-      }
-
-      function bookFlight() {
-        alert("Booking functionality to be implemented.");
+        const modal = document.getElementById("flightModal");
+        modal.style.display = "none";
       }
 
       // Close modal when clicking outside of it
       window.onclick = function (event) {
-        var modal = document.getElementById("flightModal");
+        const modal = document.getElementById("flightModal");
         if (event.target == modal) {
           modal.style.display = "none";
         }

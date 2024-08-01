@@ -7,7 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'] ?? null;
 
     // Common function to handle file uploads
-    function uploadImage($file) {
+    function uploadImage($file)
+    {
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($file['name']);
         move_uploaded_file($file['tmp_name'], $target_file);
@@ -15,7 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Common function to execute SQL and check for errors
-    function executeSQL($conn, $sql) {
+    function executeSQL($conn, $sql)
+    {
         if ($conn->query($sql) === TRUE) {
             echo "Operation completed successfully";
         } else {
@@ -83,4 +85,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
-?>

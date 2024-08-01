@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("refresh:3; url=index.html");
             exit;
         } else {
-            echo "Incorrect password.";
+            echo "Enter correct username and password.";
         }
     } else {
         echo "No user found with that username or email.";

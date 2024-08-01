@@ -20,21 +20,23 @@ $phone = $_POST['phone'];
 $check_in_date = $_POST['checkInDate'];
 $check_out_date = $_POST['checkOutDate'];
 $guests = $_POST['guests'];
+$rooms = $_POST['rooms']; // Make sure to change the name to match your input
+$room_type = $_POST['roomType'];
 
 // Prepare an SQL statement to insert the form data into the database
-$sql = "INSERT INTO site_reservations (
-    full_name, email, phone, check_in_date, check_out_date, guests
-) VALUES (?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO hotel_bookings (
+    full_name, email, phone, check_in_date, check_out_date, guests, rooms, room_type
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param(
-    "sssssi",
-    $full_name, $email, $phone, $check_in_date, $check_out_date, $guests
+    "ssssssss",
+    $full_name, $email, $phone, $check_in_date, $check_out_date, $guests, $rooms, $room_type
 );
 
 // Execute the statement
 if ($stmt->execute()) {
-    echo "Tourist site reservation submitted successfully!";
+    echo "Hotel reservation submitted successfully!";
 } else {
     echo "Error: " . $stmt->error;
 }

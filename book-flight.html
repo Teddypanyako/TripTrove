@@ -9,87 +9,199 @@
       href="images/places/Favicom1.jpg"
       type="image/x-icon"
     />
-    <link
-      rel="stylesheet"
-      href="css/book-flight.css"
-    />
-    <title>Book a flight</title>
+    <link rel="stylesheet" href="css/book-flight.css" />
+    <title>Book a Flight</title>
   </head>
   <body>
     <main>
       <section>
         <h3 class="book flight">Book a flight with us</h3>
         <div class="payment">
-          <form action="" method="post">
+          <form action="submit_booking.php" method="post">
             <p class="p1">Passenger Name</p>
             <label for="Fname">First Name:</label>
-            <input type="text" placeholder="" required />
+            <input
+              type="text"
+              id="Fname"
+              name="first_name"
+              placeholder=""
+              required
+            />
 
             <label for="Lname">Last Name:</label>
-            <input type="text" placeholder="" required /> <br /><br />
+            <input
+              type="text"
+              id="Lname"
+              name="last_name"
+              placeholder=""
+              required
+            />
+            <br /><br />
 
-            <label for="Date of Birth">Date of Birth:</label>
-            <input type="date" placeholder="" required />
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" placeholder="" required />
 
-            <label for="E-Mail">E-mail:</label>
-            <input type="email" placeholder="" required /> <br />
-            <br />
+            <label for="email">E-mail:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder=""
+              required
+            />
+            <br /><br />
 
-            <label for="Phone Number">Phone Number</label> <br />
-            <br />
+            <label for="phone_area_code">Phone Number</label> <br /><br />
 
-            <label for="Area code">Area code:</label>
-            <input type="text" placeholder="" required />
+            <label for="area_code">Area Code:</label>
+            <input
+              type="text"
+              id="area_code"
+              name="area_code"
+              placeholder=""
+              required
+            />
 
-            <label for="phone number">phone number:</label>
-            <input type="text" placeholder="" required /> <br /><br />
+            <label for="phone_number">Phone Number:</label>
+            <input
+              type="text"
+              id="phone_number"
+              name="phone_number"
+              placeholder=""
+              required
+            />
+            <br /><br />
 
             <label for="city">City:</label>
-            <input type="text" placeholder="" required /> <br /><br />
+            <input type="text" id="city" name="city" placeholder="" required />
+            <br /><br />
 
-            <label for="Address">Address:</label>
-            <input type="add" placeholder="" required /> <br /><br />
+            <label for="address">Address:</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder=""
+              required
+            />
+            <br /><br />
 
-            <label for="Postal / Zip code">Postal / Zip code:</label>
-            <input type="text" placeholder="" required />
+            <label for="postal_code">Postal / Zip Code:</label>
+            <input
+              type="text"
+              id="postal_code"
+              name="postal_code"
+              placeholder=""
+              required
+            />
 
-            <p class="p1">Depature Date & Time</p>
+            <p class="p1">Departure Date & Time</p>
 
-            <label for="Date">Date:</label>
-            <input type="date" placeholder="" required />
+            <label for="departure_date">Date:</label>
+            <input
+              type="date"
+              id="departure_date"
+              name="departure_date"
+              placeholder=""
+              required
+            />
 
-            <label for="Time">Time:</label>
-            <input type="Time" placeholder="" required />
+            <label for="departure_time">Time:</label>
+            <input
+              type="time"
+              id="departure_time"
+              name="departure_time"
+              placeholder=""
+              required
+            />
 
             <p class="p1">Return Date & Time</p>
 
-            <label for="Date">Date:</label>
-            <input type="date" placeholder="" required />
+            <label for="return_date">Date:</label>
+            <input
+              type="date"
+              id="return_date"
+              name="return_date"
+              placeholder=""
+              required
+            />
 
-            <label for="Time">Time:</label>
-            <input type="Time" placeholder="" required /> <br />
-            <br />
+            <label for="return_time">Time:</label>
+            <input
+              type="time"
+              id="return_time"
+              name="return_time"
+              placeholder=""
+              required
+            />
+            <br /><br />
 
-            <label for="Departing From">Departing From:</label>
-            <input type="text" placeholder="Enter Country" required />
-            <input type="text" placeholder="Type City" required /> <br /><br />
+            <label for="departing_from_country">Departing From:</label>
+            <input
+              type="text"
+              id="departing_from_country"
+              name="departing_from_country"
+              placeholder="Enter Country"
+              required
+            />
+            <input
+              type="text"
+              id="departing_from_city"
+              name="departing_from_city"
+              placeholder="Type City"
+              required
+            />
+            <br /><br />
 
-            <label for="Departing From">Destination:</label>
-            <input type="text" placeholder="Enter Country" required />
-            <input type="text" placeholder="Type City" required /> <br /><br />
+            <label for="destination_country">Destination:</label>
+            <input
+              type="text"
+              id="destination_country"
+              name="destination_country"
+              placeholder="Enter Country"
+              required
+            />
+            <input
+              type="text"
+              id="destination_city"
+              name="destination_city"
+              placeholder="Type City"
+              required
+            />
+            <br /><br />
 
-            <label for="Number of seats">Number of seats:</label>
-            <input type="number" placeholder="" min="1" required />
+            <label for="number_of_seats">Number of Seats:</label>
+            <input
+              type="number"
+              id="number_of_seats"
+              name="number_of_seats"
+              placeholder=""
+              min="1"
+              required
+            />
 
             <p class="p1">Trip-Route</p>
             <br />
-            <input type="radio" placeholder="" required />
-            <label for="One way">One way</label>
-            <input type="radio" placeholder="" required />
-            <label for="Round-Trip">Round Trip</label>
+            <input
+              type="radio"
+              id="one_way"
+              name="trip_route"
+              value="one_way"
+              required
+            />
+            <label for="one_way">One Way</label>
+            <input
+              type="radio"
+              id="round_trip"
+              name="trip_route"
+              value="round_trip"
+              required
+            />
+            <label for="round_trip">Round Trip</label>
 
+            <br /><br />
             <button type="submit">Submit</button>
-            <button type="submit">Back</button>
+            <button type="button" onclick="window.history.back();">Back</button>
           </form>
         </div>
       </section>

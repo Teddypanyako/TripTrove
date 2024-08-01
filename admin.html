@@ -21,33 +21,50 @@
           id="addFlightForm"
           method="POST"
           enctype="multipart/form-data"
-          action="add_flight.php"
+          action="admin-dash.php"
         >
+          <input type="hidden" name="action" value="add" />
+          <input type="hidden" name="id" />
           <input
             type="text"
+            id="flight_name"
             name="flight_name"
             placeholder="Flight Name"
             required
           />
-          <input type="text" name="origin" placeholder="Origin" required />
           <input
             type="text"
+            id="origin"
+            name="origin"
+            placeholder="Origin"
+            required
+          />
+          <input
+            type="text"
+            id="destination"
             name="destination"
             placeholder="Destination"
             required
           />
-          <input type="number" name="price" placeholder="Price" required />
+          <input
+            type="number"
+            id="price"
+            name="price"
+            placeholder="Price"
+            required
+          />
           <input
             type="date"
+            id="travel_date"
             name="travel_date"
             placeholder="Travel Date"
             required
           />
-          <select name="class" required>
+          <select id="class" name="class" required>
             <option value="business">Business</option>
             <option value="economy">Economy</option>
           </select>
-          <input type="file" name="image" required />
+          <input type="file" id="flight_image" name="image" required />
           <button type="submit">Add Flight</button>
         </form>
       </div>
@@ -61,15 +78,35 @@
           enctype="multipart/form-data"
           action="add_hotel.php"
         >
-          <input type="text" name="name" placeholder="Hotel Name" required />
-          <input type="text" name="location" placeholder="Location" required />
-          <textarea name="services" placeholder="Services" required></textarea>
+          <input type="hidden" name="action" value="add" />
+          <input type="hidden" name="id" />
+          <input
+            type="text"
+            id="hotel_name"
+            name="name"
+            placeholder="Hotel Name"
+            required
+          />
+          <input
+            type="text"
+            id="hotel_location"
+            name="location"
+            placeholder="Location"
+            required
+          />
           <textarea
+            id="hotel_services"
+            name="services"
+            placeholder="Services"
+            required
+          ></textarea>
+          <textarea
+            id="hotel_description"
             name="description"
             placeholder="Description"
             required
           ></textarea>
-          <input type="file" name="image" required />
+          <input type="file" id="hotel_image" name="image" required />
           <button type="submit">Add Hotel</button>
         </form>
       </div>
@@ -83,14 +120,29 @@
           enctype="multipart/form-data"
           action="add_tourist_site.php"
         >
-          <input type="text" name="name" placeholder="Site Name" required />
-          <input type="text" name="location" placeholder="Location" required />
+          <input type="hidden" name="action" value="add" />
+          <input type="hidden" name="id" />
+          <input
+            type="text"
+            id="site_name"
+            name="name"
+            placeholder="Site Name"
+            required
+          />
+          <input
+            type="text"
+            id="site_location"
+            name="location"
+            placeholder="Location"
+            required
+          />
           <textarea
+            id="site_description"
             name="description"
             placeholder="Description"
             required
           ></textarea>
-          <input type="file" name="image" required />
+          <input type="file" id="site_image" name="image" required />
           <button type="submit">Add Tourist Site</button>
         </form>
       </div>
@@ -204,6 +256,87 @@
             // Example: Reload the table data or remove the deleted row from UI
           });
       }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Fetch and display flights data
+        fetch("fetch_flights.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const flightsTableBody = document.querySelector(
+              "#flightsTable tbody"
+            );
+            flightsTableBody.innerHTML = data
+              .map(
+                (flight) => `
+              <tr>
+                <td>${flight.flight_name}</td>
+                <td>${flight.origin}</td>
+                <td>${flight.destination}</td>
+                <td>${flight.price}</td>
+                <td>${flight.travel_date}</td>
+                <td>${flight.class}</td>
+                <td><img src="uploads/${flight.image}" alt="${flight.flight_name}" width="100" /></td>
+                <td>
+                  <button onclick="editEntry('flight', ${flight.id})">Edit</button>
+                  <button onclick="deleteEntry('flight', ${flight.id})">Delete</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("");
+          });
+
+        // Fetch and display hotels data
+        fetch("fetch_hotels.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const hotelsTableBody =
+              document.querySelector("#hotelsTable tbody");
+            hotelsTableBody.innerHTML = data
+              .map(
+                (hotel) => `
+              <tr>
+                <td>${hotel.hotel_name}</td>
+                <td>${hotel.location}</td>
+                <td>${hotel.services}</td>
+                <td>${hotel.description}</td>
+                <td><img src="uploads/${hotel.image}" alt="${hotel.hotel_name}" width="100" /></td>
+                <td>
+                  <button onclick="editEntry('hotel', ${hotel.id})">Edit</button>
+                  <button onclick="deleteEntry('hotel', ${hotel.id})">Delete</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("");
+          });
+
+        // Fetch and display tourist sites data
+        fetch("fetch_tourist_sites.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const touristSitesTableBody = document.querySelector(
+              "#touristSitesTable tbody"
+            );
+            touristSitesTableBody.innerHTML = data
+              .map(
+                (site) => `
+              <tr>
+                <td>${site.site_name}</td>
+                <td>${site.location}</td>
+                <td>${site.description}</td>
+                <td><img src="uploads/${site.image}" alt="${site.site_name}" width="100" /></td>
+                <td>
+                  <button onclick="editEntry('tourist_site', ${site.id})">Edit</button>
+                  <button onclick="deleteEntry('tourist_site', ${site.id})">Delete</button>
+                </td>
+              </tr>
+            `
+              )
+              .join("");
+          });
+      });
     </script>
   </body>
 </html>

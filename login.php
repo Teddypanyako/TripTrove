@@ -24,22 +24,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("SELECT id, password FROM signup WHERE username = ? OR email = ?");
+    $stmt = $conn->prepare("SELECT id, password, role FROM signup WHERE username = ? OR email = ?");
     $stmt->bind_param("ss", $username_email, $username_email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $hashedPassword);
+        $stmt->bind_result($id, $hashedPassword, $role);
         $stmt->fetch();
 
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['user_id'] = $id;
-            echo "Login successful!";
-            header("refresh:3; url=index.html");
+            $_SESSION['username'] = $username_email;
+            $_SESSION['role'] = $role;
+
+            if ($role === 'admin') {
+                header("Location: admin.php");
+            } else {
+                echo "Login successful! Redirecting to user page...";
+                header("refresh:3; url=index.html");
+            }
             exit;
         } else {
-            echo "Enter correct username and password.";
+            echo "Invalid username or password.";
         }
     } else {
         echo "No user found with that username or email.";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 31, 2024 at 12:40 AM
+-- Generation Time: Aug 04, 2024 at 07:15 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -34,6 +34,14 @@ CREATE TABLE `contacts` (
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `message`) VALUES
+(1, 'malinid', 'babyanonymouse2@gmail.com', 'this is a sample text'),
+(2, 'malinid', 'lynn@admin.com', 'this is a text');
+
 -- --------------------------------------------------------
 
 --
@@ -48,17 +56,16 @@ CREATE TABLE `flights` (
   `price` decimal(10,2) NOT NULL,
   `travel_date` date NOT NULL,
   `class` enum('business','economy') NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `flights`
 --
 
-INSERT INTO `flights` (`id`, `flight_name`, `origin`, `destination`, `price`, `travel_date`, `class`, `image`, `created_at`) VALUES
-(1, 'flight 1', 'dandora', 'umoja', 1000.00, '2024-08-01', 'business', 'Screenshot from 2024-07-24 20-35-41.png', '2024-07-30 21:31:59'),
-(2, 'flight 1', 'dandora 1', 'umoja 2', 1500.00, '2024-08-02', 'economy', '322093.jpg', '2024-07-30 21:48:27');
+INSERT INTO `flights` (`id`, `flight_name`, `origin`, `destination`, `price`, `travel_date`, `class`, `image`) VALUES
+(4, 'flight 747', 'Nairobi', 'Kiambu', 12000.00, '2024-08-15', 'economy', 'Anonymouse logo 2.png'),
+(7, 'chicago flight', 'london', 'new york', 4000.00, '2024-08-06', 'business', 'Screenshot from 2024-08-01 11-09-19.png');
 
 -- --------------------------------------------------------
 
@@ -97,20 +104,19 @@ CREATE TABLE `flight_bookings` (
 
 CREATE TABLE `hotels` (
   `id` int(11) NOT NULL,
-  `hotel_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `services` text NOT NULL,
   `description` text NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hotels`
 --
 
-INSERT INTO `hotels` (`id`, `hotel_name`, `location`, `services`, `description`, `image`, `created_at`) VALUES
-(1, 'sarova', 'umoja', 'accomodation', 'full service', '322093.jpg', '2024-07-30 21:32:52');
+INSERT INTO `hotels` (`id`, `name`, `location`, `services`, `description`, `image`) VALUES
+(1, 'Serena', 'Nairobi', 'Full accomodation', 'full service', 'Anonymouse logo 2.png');
 
 -- --------------------------------------------------------
 
@@ -177,7 +183,7 @@ CREATE TABLE `signup` (
 --
 
 INSERT INTO `signup` (`id`, `fname`, `lname`, `email`, `username`, `password`, `role`, `created_at`) VALUES
-(3, 'Johnte', 'Doen', 'admin@example.com', 'admin@example.com', '$2y$10$ZBmPO82eSmv1ZMTEqUDVM.0vTFQmM7/02RKS1P8oIF/H9Rs0vwzxW', 'client', '2024-07-29 22:18:56');
+(5, 'Admin', 'Teddy', 'admin@example.com', 'admin', '$2y$10$LsK6UUpKHxxsa63XIcnEFO9.rfTuJCGPAYCrYUe31IY3zw.q34T02', 'admin', '2024-08-04 17:05:32');
 
 -- --------------------------------------------------------
 
@@ -223,19 +229,18 @@ CREATE TABLE `subscriptions` (
 
 CREATE TABLE `tourist_sites` (
   `id` int(11) NOT NULL,
-  `site_name` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tourist_sites`
 --
 
-INSERT INTO `tourist_sites` (`id`, `site_name`, `location`, `description`, `image`, `created_at`) VALUES
-(1, 'malinid', 'lamu', 'mombasa', '322093.jpg', '2024-07-30 21:33:14');
+INSERT INTO `tourist_sites` (`id`, `name`, `location`, `description`, `image`) VALUES
+(3, 'Fort Jesus', 'Mombasa', 'old ruin', 'Screenshot from 2024-08-01 17-54-09.png');
 
 --
 -- Indexes for dumped tables
@@ -310,13 +315,13 @@ ALTER TABLE `tourist_sites`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `flights`
 --
 ALTER TABLE `flights`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `flight_bookings`
@@ -328,7 +333,7 @@ ALTER TABLE `flight_bookings`
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `hotel_bookings`
@@ -346,7 +351,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `signup`
 --
 ALTER TABLE `signup`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `site_reservations`
@@ -364,7 +369,7 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `tourist_sites`
 --
 ALTER TABLE `tourist_sites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

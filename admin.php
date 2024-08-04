@@ -1,81 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="css/admin.css" />
-    <link
-      rel="shortcut icon"
-      href="images/places/Favicom1.jpg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="images/places/Favicom1.jpg" type="image/x-icon" />
 </head>
+
 <body>
     <h1>Admin Dashboard</h1>
     <div class="container">
         <!-- Add Flight Form -->
         <div class="form-section">
             <h2>Add Flight</h2>
-            <form
-              id="addFlightForm"
-              method="POST"
-              enctype="multipart/form-data"
-              action="add_flight.php"
-            >
+            <form id="addFlightForm" method="POST" enctype="multipart/form-data" action="add_flight.php">
                 <input type="hidden" name="action" value="add" />
                 <input type="hidden" name="id" />
-                <input
-                  type="text"
-                  id="flight_name"
-                  name="flight_name"
-                  placeholder="Flight Name"
-                  required
-                />
-                <input
-                  type="text"
-                  id="origin"
-                  name="origin"
-                  placeholder="Origin"
-                  required
-                />
-                <input
-                  type="text"
-                  id="destination"
-                  name="destination"
-                  placeholder="Destination"
-                  required
-                />
-                <input
-                  type="number"
-                  id="price"
-                  name="price"
-                  placeholder="Price"
-                  required
-                />
-                <input
-                  type="date"
-                  id="travel_date"
-                  name="travel_date"
-                  placeholder="Travel Date"
-                  required
-                />
-                <select
-                  title="Select flight class"
-                  id="flight_class"
-                  name="class"
-                  required
-                >
+                <input type="text" id="flight_name" name="flight_name" placeholder="Flight Name" required />
+                <input type="text" id="origin" name="origin" placeholder="Origin" required />
+                <input type="text" id="destination" name="destination" placeholder="Destination" required />
+                <input type="number" id="price" name="price" placeholder="Price" required />
+                <input type="date" id="travel_date" name="travel_date" placeholder="Travel Date" required />
+                <select title="Select flight class" id="flight_class" name="class" required>
                     <option value="business">Business</option>
                     <option value="economy">Economy</option>
                 </select>
-                <input
-                  title="choose flight image"
-                  type="file"
-                  id="flight_image"
-                  name="image"
-                  required
-                />
+                <input title="choose flight image" type="file" id="flight_image" name="image" required />
                 <button type="submit">Add Flight</button>
             </form>
         </div>
@@ -83,47 +35,14 @@
         <!-- Add Hotel Form -->
         <div class="form-section">
             <h2>Add Hotel</h2>
-            <form
-              id="addHotelForm"
-              method="POST"
-              enctype="multipart/form-data"
-              action="add_hotel.php"
-            >
+            <form id="addHotelForm" method="POST" enctype="multipart/form-data" action="add_hotel.php">
                 <input type="hidden" name="action" value="add" />
                 <input type="hidden" name="id" />
-                <input
-                  type="text"
-                  id="hotel_name"
-                  name="name"
-                  placeholder="Hotel Name"
-                  required
-                />
-                <input
-                  type="text"
-                  id="hotel_location"
-                  name="location"
-                  placeholder="Location"
-                  required
-                />
-                <textarea
-                  id="hotel_services"
-                  name="services"
-                  placeholder="Services"
-                  required
-                ></textarea>
-                <textarea
-                  id="hotel_description"
-                  name="description"
-                  placeholder="Description"
-                  required
-                ></textarea>
-                <input
-                  title="choose hotel image"
-                  type="file"
-                  id="hotel_image"
-                  name="image"
-                  required
-                />
+                <input type="text" id="hotel_name" name="name" placeholder="Hotel Name" required />
+                <input type="text" id="hotel_location" name="location" placeholder="Location" required />
+                <textarea id="hotel_services" name="services" placeholder="Services" required></textarea>
+                <textarea id="hotel_description" name="description" placeholder="Description" required></textarea>
+                <input title="choose hotel image" type="file" id="hotel_image" name="image" required />
                 <button type="submit">Add Hotel</button>
             </form>
         </div>
@@ -131,41 +50,13 @@
         <!-- Add Tourist Site Form -->
         <div class="form-section">
             <h2>Add Tourist Site</h2>
-            <form
-              id="addTouristSiteForm"
-              method="POST"
-              enctype="multipart/form-data"
-              action="add_tourist_site.php"
-            >
+            <form id="addTouristSiteForm" method="POST" enctype="multipart/form-data" action="add_tourist_site.php">
                 <input type="hidden" name="action" value="add" />
                 <input type="hidden" name="id" />
-                <input
-                  type="text"
-                  id="site_name"
-                  name="name"
-                  placeholder="Site Name"
-                  required
-                />
-                <input
-                  type="text"
-                  id="site_location"
-                  name="location"
-                  placeholder="Location"
-                  required
-                />
-                <textarea
-                  id="site_description"
-                  name="description"
-                  placeholder="Description"
-                  required
-                ></textarea>
-                <input
-                  title="choose site image"
-                  type="file"
-                  id="site_image"
-                  name="image"
-                  required
-                />
+                <input type="text" id="site_name" name="name" placeholder="Site Name" required />
+                <input type="text" id="site_location" name="location" placeholder="Location" required />
+                <textarea id="site_description" name="description" placeholder="Description" required></textarea>
+                <input title="choose site image" type="file" id="site_image" name="image" required />
                 <button type="submit">Add Tourist Site</button>
             </form>
         </div>
@@ -326,4 +217,5 @@
         </table>
     </div>
 </body>
+
 </html>

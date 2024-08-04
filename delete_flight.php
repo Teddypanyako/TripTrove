@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
 
     if ($stmt->affected_rows > 0) {
         echo "<p style='display:flex;justify-content:center;align-items:center;color:green;font-size:3rem;font-weight:bold;'>Flight Deleted Successfully</p>";
-        echo "header('refresh:2; url=admin.php')";
+        header("refresh:2; url=admin.php");
     } else {
         echo "<p style='display:flex;justify-content:center;align-items:center;color:red;font-size:3rem;font-weight:bold;'>Error Deleting Flight </p>";
     }
@@ -38,9 +38,10 @@ if (isset($_GET['hotel_id'])) {
 
     if ($stmt->affected_rows > 0) {
         echo "<p style='display:flex;justify-content:center;align-items:center;color:green;font-size:3rem;font-weight:bold;'>Hotel Deleted Succesfully</p>";
-        echo "header('refresh:2; url=admin.php')";
+        header("refresh:2; url=admin.php");
     } else {
         echo "<p style='display:flex;justify-content:center;align-items:center;color:red;font-size:3rem;font-weight:bold;'>Error Deleting Hotel</p>";
+        header('refresh:2; url=admin.php');
     }
 
     $stmt->close();

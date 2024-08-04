@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 
                 if ($stmt->affected_rows > 0) {
                     echo "<p style='text-align: center; font-weight: bold; color: green;'>Flight added successfully.</p>";
-                    echo "header('refresh:2; url=admin.php')";
+                    header("refresh:2; url=admin.php");
                 } else {
                     echo "<p style='text-align: center; font-weight: bold; color: red;'>Error adding flight.</p>";
                 }

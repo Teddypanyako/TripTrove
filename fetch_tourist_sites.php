@@ -1,30 +1,27 @@
 <?php
 // Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$host = 'localhost';
+$db = 'project';
+$user = 'root';
+$pass = '';
+$conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all tourist sites
+// Fetch tourist sites data
 $sql = "SELECT * FROM tourist_sites";
 $result = $conn->query($sql);
 
-$data = [];
+$sites = [];
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
+    while($row = $result->fetch_assoc()) {
+        $sites[] = $row;
     }
 }
 
-$conn->close();
+echo json_encode($sites);
 
-// Return JSON data
-header('Content-Type: application/json');
-echo json_encode($data);
+$conn->close();
 ?>

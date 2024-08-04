@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tourist-sites</title>
+    <title>Tourist Sites</title>
     <link rel="stylesheet" href="css/tourist-sites.css" />
     <link
       class="favi"
@@ -22,22 +22,26 @@
         <div>
           <nav class="nav1">
             <ul>
-              <li>Museus</li>
-              <li>Wild-Life-Reservations</li>
-              <li>Water-falls</li>
-              <li>Game-pakrs</li>
+              <li>Museum</li>
+              <li>Wildlife Reservations</li>
+              <li>Waterfalls</li>
+              <li>Gameparks</li>
             </ul>
           </nav>
         </div>
       </section>
 
       <section class="sec2">
-        <h3 class="p1">Creating the best memories</h3>
+        <h3 class="p1">Find the Best Tourist Sites</h3>
         <br />
-        <br /><br /><br /><br /><br /><br /><br /><br />
+        <h3>Why book with us</h3>
+        <p>
+          Choose from a wide range of tourist sites, from museums to game parks.
+        </p>
+      </section>
 
-        <h3>This is us</h3>
-        <p></p>
+      <section id="tourist-sites-section">
+        <!-- Tourist sites will be dynamically inserted here -->
       </section>
 
       <section class="contact-section">
@@ -61,7 +65,7 @@
             </div>
             <div class="footer-section subscription">
               <h4>Subscribe to our Newsletter</h4>
-              <form action="subscribe" method="post">
+              <form action="subscribe.php" method="post">
                 <input
                   type="email"
                   name="email"
@@ -94,5 +98,51 @@
         </footer>
       </section>
     </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("fetch_sites.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const touristSitesSection = document.getElementById("tourist-sites-section");
+            data.forEach((site) => {
+              const siteDiv = document.createElement("div");
+              siteDiv.classList.add("site");
+              siteDiv.innerHTML = `
+                            <h4>${site.name}</h4>
+                            <p>Location: ${site.location}</p>
+                            <p>Description: ${site.description}</p>
+                            <img src="uploads/${site.image}" alt="${site.name}">
+                            <a href="make-payment.html">Make payments</a>
+                        `;
+              touristSitesSection.appendChild(siteDiv);
+            });
+          });
+      });
+
+      function showSiteDetails(
+        name,
+        location,
+        description,
+        imagePath
+      ) {
+        // Implement modal functionality to show site details
+      }
+
+      function closeSiteDetails() {
+        // Implement modal close functionality
+      }
+
+      function bookSite() {
+        alert("Booking functionality to be implemented.");
+      }
+
+      // Close modal when clicking outside of it
+      window.onclick = function (event) {
+        var modal = document.getElementById("siteModal");
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
   </body>
 </html>

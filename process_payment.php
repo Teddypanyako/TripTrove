@@ -1,40 +1,32 @@
 <?php
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "project";
+header('Content-Type: application/json');
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Check if the request method is POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Retrieve form data
+    $fullName = trim($_POST['fullName']);
+    $email = trim($_POST['email']);
+    $cardNumber = trim($_POST['cardNumber']);
+    $expDate = trim($_POST['expDate']);
+    $cvv = trim($_POST['cvv']);
+    $amount = trim($_POST['amount']);
 
-// Get form data
-$fullName = $_POST['fullName'];
-$email = $_POST['email'];
-$cardNumber = $_POST['cardNumber'];
-$expDate = $_POST['expDate'];
-$cvv = $_POST['cvv'];
-$amount = $_POST['amount'];
+    // Validate form data
+    if (empty($fullName) || empty($email) || empty($cardNumber) || empty($expDate) || empty($cvv) || empty($amount)) {
+        echo json_encode(['status' => 'error', 'message' => 'All fields are required.']);
+        exit;
+    }
 
-// Validate form data (basic example)
-if (empty($fullName) || empty($email) || empty($cardNumber) || empty($expDate) || empty($cvv) || empty($amount)) {
-    echo json_encode(['status' => 'error', 'message' => 'All fields are required.']);
-    exit();
-}
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid email format.']);
+        exit;
+    }
 
-// Insert payment details into database (assuming there's a payments table)
-$sql = "INSERT INTO payments (full_name, email, card_number, exp_date, cvv, amount) VALUES (?, ?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("sssssi", $fullName, $email, $cardNumber, $expDate, $cvv, $amount);
+    // Here you would integrate with a payment gateway to process the payment
+    // For demonstration, we will just return a success message
 
-if ($stmt->execute()) {
-    echo json_encode(['status' => 'success', 'message' => 'Payment processed successfully.']);
+    echo json_encode(['status' => 'success', 'message' => 'Payment processed successfully!']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Error processing payment.']);
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
 }
-
-$stmt->close();
-$conn->close();

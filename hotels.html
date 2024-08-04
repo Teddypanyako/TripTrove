@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotels</title>
-<link rel="stylesheet" href="css/hotels.css">    <link
+    <link rel="stylesheet" href="css/hotels.css" />
+    <link
       class="favi"
       rel="shortcut icon"
       href="images/places/Favicom1.jpg"
@@ -113,9 +114,8 @@
                             <p>Location: ${hotel.location}</p>
                             <p>Services: ${hotel.services}</p>
                             <p>Description: ${hotel.description}</p>
-                            <p>Price: ${hotel.price}</p>
-                            <img src="${hotel.image_path}" alt="${hotel.name}">
-                            <button onclick="showHotelDetails('${hotel.name}', '${hotel.location}', '${hotel.services}', '${hotel.description}', '${hotel.price}', '${hotel.image_path}')">View Details</button>
+                            <img src="uploads/${hotel.image}" alt="${hotel.name}">
+                            <button onclick="showHotelDetails('${hotel.name}', '${hotel.location}', '${hotel.services}', '${hotel.description}', '${hotel.price}', '${hotel.image}')">View Details</button>
                         `;
               hotelsSection.appendChild(hotelDiv);
             });

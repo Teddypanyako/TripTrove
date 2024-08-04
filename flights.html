@@ -100,12 +100,10 @@
     <div id="flightModal" class="modal">
       <div class="modal-content">
         <span class="close-button" onclick="closeFlightDetails()">&times;</span>
-        <h4 id="modal-travel-date"></h4>
-        <p id="modal-departure-from"></p>
+        <h4 id="modal-flight-name"></h4>
+        <p id="modal-travel-date"></p>
         <p id="modal-destination"></p>
         <p id="modal-class"></p>
-        <p id="modal-business-class-price"></p>
-        <p id="modal-economy-class-price"></p>
         <img id="modal-image" src="" alt="Flight Image" />
       </div>
     </div>
@@ -115,71 +113,31 @@
         fetch("fetch_flights.php")
           .then((response) => response.json())
           .then((data) => {
-            const flightsSection = document.getElementById("flights-section");
-            data.forEach((flight) => {
-              const flightDiv = document.createElement("div");
-              flightDiv.classList.add("flight");
-              flightDiv.innerHTML = `
-                            <h4>Travel Date: ${flight.travel_date}</h4>
-                            <p>Departure From: ${flight.departure_from}</p>
-                            <p>Destination: ${flight.destination}</p>
-                            <p>Class: ${flight.class}</p>
-                            <p>Business Class Price: ${flight.business_class_price}</p>
-                            <p>Economy Class Price: ${flight.economy_class_price}</p>
-                            <img src="${flight.image_path}" alt="${flight.destination}">
-                            <button onclick="showFlightDetails('${flight.travel_date}', '${flight.departure_from}', '${flight.destination}', '${flight.class}', '${flight.business_class_price}', '${flight.economy_class_price}', '${flight.image_path}')">View Details</button>
-                        `;
-              flightsSection.appendChild(flightDiv);
-            });
+            if (data.error) {
+              console.error(data.error);
+            } else {
+              const flightsSection = document.getElementById("flights-section");
+              data.forEach((flight) => {
+                const flightDiv = document.createElement("div");
+                flightDiv.classList.add("flight");
+
+                const flightInfo = `
+                                <h4>Flight Name: ${flight.flight_name}</h4>
+                                <p>Travel Date: ${flight.travel_date}</p>
+                                <p>Departure From: ${flight.origin}</p>
+                                <p>Destination: ${flight.destination}</p>
+                                <p>Class: ${flight.class}</p>
+                                <p>Price: ${flight.price}</p>
+                                <img src="uploads/${flight.image}" alt="Flight Image" />
+                            `;
+
+                flightDiv.innerHTML = flightInfo;
+                flightsSection.appendChild(flightDiv);
+              });
+            }
           })
           .catch((error) => console.error("Error fetching flights:", error));
       });
-
-      function showFlightDetails(
-        travelDate,
-        departureFrom,
-        destination,
-        flightClass,
-        businessClassPrice,
-        economyClassPrice,
-        imagePath
-      ) {
-        document.getElementById(
-          "modal-travel-date"
-        ).textContent = `Travel Date: ${travelDate}`;
-        document.getElementById(
-          "modal-departure-from"
-        ).textContent = `Departure From: ${departureFrom}`;
-        document.getElementById(
-          "modal-destination"
-        ).textContent = `Destination: ${destination}`;
-        document.getElementById(
-          "modal-class"
-        ).textContent = `Class: ${flightClass}`;
-        document.getElementById(
-          "modal-business-class-price"
-        ).textContent = `Business Class Price: ${businessClassPrice}`;
-        document.getElementById(
-          "modal-economy-class-price"
-        ).textContent = `Economy Class Price: ${economyClassPrice}`;
-        document.getElementById("modal-image").src = imagePath;
-
-        const modal = document.getElementById("flightModal");
-        modal.style.display = "block";
-      }
-
-      function closeFlightDetails() {
-        const modal = document.getElementById("flightModal");
-        modal.style.display = "none";
-      }
-
-      // Close modal when clicking outside of it
-      window.onclick = function (event) {
-        const modal = document.getElementById("flightModal");
-        if (event.target == modal) {
-          modal.style.display = "none";
-        }
-      };
     </script>
   </body>
 </html>

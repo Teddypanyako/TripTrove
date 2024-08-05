@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT name, location, description, image FROM tourist_sites";
+$sql = "SELECT name, location, price, description, image FROM tourist_sites";
 $result = $conn->query($sql);
 
 $tourist_sites = array();

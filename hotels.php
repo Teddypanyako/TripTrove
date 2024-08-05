@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $location = $_POST['location'];
     $services = $_POST['services'];
     $description = $_POST['description'];
+    $price = $_POST['price'];
 
     // Handle file upload
     $target_dir = "uploads/";
@@ -56,8 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert data into the database
     if ($uploadOk == 1) {
-        $stmt = $conn->prepare("INSERT INTO hotels (name, location, services, description, image_path, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("sssss", $name, $location, $services, $description, $image_path);
+        $stmt = $conn->prepare("INSERT INTO hotels (name, location, price, services, description, image_path, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssss", $name, $location, $price, $services, $description, $image_path);
 
         if ($stmt->execute()) {
             echo "New hotel record created successfully";
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Fetch hotel data
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    $sql = "SELECT name, location, services, description, image_path FROM hotels";
+    $sql = "SELECT name, location, price, services, description, image_path FROM hotels";
     $result = $conn->query($sql);
 
     $hotels = array();
@@ -79,10 +80,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         while ($row = $result->fetch_assoc()) {
             $hotels[] = $row;
         }
-    } 
+    }
 
     echo json_encode($hotels);
 }
 
 $conn->close();
-

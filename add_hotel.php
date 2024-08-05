@@ -1,4 +1,8 @@
 <?php
+// display errors
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Database connection
 $host = 'localhost';
 $db = 'project';
@@ -16,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $location = htmlspecialchars($_POST['location']);
     $services = htmlspecialchars($_POST['services']);
     $description = htmlspecialchars($_POST['description']);
+    $price = htmlspecialchars($_POST['price']);
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $image = $_FILES['image']['name'];
@@ -32,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Move the uploaded file
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
             // Insert into database
-            $sql = "INSERT INTO hotels (name, location, services, description, image) VALUES (?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO hotels (name, location, price, services, description, image) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('sssss', $name, $location, $services, $description, $image);
+            $stmt->bind_param('ssssss', $name, $location, $price, $services, $description, $image);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {

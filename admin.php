@@ -40,6 +40,7 @@
                 <input type="hidden" name="id" />
                 <input type="text" id="hotel_name" name="name" placeholder="Hotel Name" required />
                 <input type="text" id="hotel_location" name="location" placeholder="Location" required />
+                <input type="number" id="hotel_price" name="price" placeholder="enter price" required>
                 <textarea id="hotel_services" name="services" placeholder="Services" required></textarea>
                 <textarea id="hotel_description" name="description" placeholder="Description" required></textarea>
                 <input title="choose hotel image" type="file" id="hotel_image" name="image" required />
@@ -55,6 +56,7 @@
                 <input type="hidden" name="id" />
                 <input type="text" id="site_name" name="name" placeholder="Site Name" required />
                 <input type="text" id="site_location" name="location" placeholder="Location" required />
+                <input type="number" id="site_price" name="price" placeholder="enter price" required>
                 <textarea id="site_description" name="description" placeholder="Description" required></textarea>
                 <input title="choose site image" type="file" id="site_image" name="image" required />
                 <button type="submit">Add Tourist Site</button>
@@ -129,6 +131,7 @@
                     <th>Location</th>
                     <th>Services</th>
                     <th>Description</th>
+                    <th>Price</th>
                     <th>Image</th>
                     <th>Actions</th>
                 </tr>
@@ -153,6 +156,7 @@
                             <td>{$row['location']}</td>
                             <td>{$row['services']}</td>
                             <td>{$row['description']}</td>
+                            <td>{$row['price']}</td>
                             <td><img src='uploads/{$row['image']}' alt='{$row['name']}' width='100'></td>
                             <td>
                                 <a href='edit_hotel.php?id={$row['id']}'>Edit</a> |
@@ -177,6 +181,7 @@
                     <th>Site Name</th>
                     <th>Location</th>
                     <th>Description</th>
+                    <th>Price</th>
                     <th>Image</th>
                     <th>Actions</th>
                 </tr>
@@ -200,6 +205,7 @@
                             <td>{$row['name']}</td>
                             <td>{$row['location']}</td>
                             <td>{$row['description']}</td>
+                            <td>{$row['price']}</td>
                             <td><img src='uploads/{$row['image']}' alt='{$row['name']}' width='100'></td>
                             <td>
                                 <a href='edit_tourist_site.php?id={$row['id']}'>Edit</a> |

@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-$sql = "SELECT id, name, location, services, description, image FROM hotels";
+$sql = "SELECT id, name, location, services, price, description, image FROM hotels";
 $result = $conn->query($sql);
 
 $hotels = [];

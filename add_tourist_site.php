@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = htmlspecialchars($_POST['name']);
     $location = htmlspecialchars($_POST['location']);
     $description = htmlspecialchars($_POST['description']);
+    $price = htmlspecialchars($_POST['price']);
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $image = $_FILES['image']['name'];
@@ -31,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Move the uploaded file
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
             // Insert into database
-            $sql = "INSERT INTO tourist_sites (name, location, description, image) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO tourist_sites (name, location, price, description, image) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param('ssss', $name, $location, $description, $image);
+            $stmt->bind_param('sssss', $name, $location, $price, $description, $image);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {

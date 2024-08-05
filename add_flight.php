@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     $destination = $_POST['destination'];
     $price = $_POST['price'];
     $travel_date = $_POST['travel_date'];
+    $travel_time = $_POST['travel_time'];
     $class = $_POST['class'];
 
     // Handle file upload
@@ -57,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         } else {
             if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
                 // Insert into database
-                $sql = "INSERT INTO flights (flight_name, origin, destination, price, travel_date, class, image) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO flights (flight_name, origin, destination, price, travel_date,travel_date, class, image) VALUES (?, ?, ?, ?, ?, ?, ?,)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param('sssssss', $flight_name, $origin, $destination, $price, $travel_date, $class, $image);
                 $stmt->execute();

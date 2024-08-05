@@ -10,6 +10,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get form data
     $travel_date = $_POST['travel_date'];
+    $travel_time = $_POST['travel_time'];
     $departure_from = $_POST['departure_from'];
     $destination = $_POST['destination'];
     $class = $_POST['class'];
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Insert data into the database
     if ($uploadOk == 1) {
         $stmt = $conn->prepare("INSERT INTO flights (travel_date, departure_from, destination, class, business_class_price, economy_class_price, image_path, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssssdds", $travel_date, $departure_from, $destination, $class, $business_class_price, $economy_class_price, $image_path);
+        $stmt->bind_param("ssssdds", $travel_date, $travel_time, $departure_from, $destination, $class, $business_class_price, $economy_class_price, $image_path);
 
         if ($stmt->execute()) {
             echo "New flight record created successfully";

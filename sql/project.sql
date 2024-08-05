@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 04, 2024 at 07:15 PM
+-- Generation Time: Aug 05, 2024 at 02:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -108,15 +108,16 @@ CREATE TABLE `hotels` (
   `location` varchar(255) NOT NULL,
   `services` text NOT NULL,
   `description` text NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `hotels`
 --
 
-INSERT INTO `hotels` (`id`, `name`, `location`, `services`, `description`, `image`) VALUES
-(1, 'Serena', 'Nairobi', 'Full accomodation', 'full service', 'Anonymouse logo 2.png');
+INSERT INTO `hotels` (`id`, `name`, `location`, `services`, `description`, `image`, `price`) VALUES
+(1, 'Serena', 'Mombasa', 'fsfs', 'fsfasca', '322093.jpg', 37888.00);
 
 -- --------------------------------------------------------
 
@@ -232,15 +233,16 @@ CREATE TABLE `tourist_sites` (
   `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `image` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tourist_sites`
 --
 
-INSERT INTO `tourist_sites` (`id`, `name`, `location`, `description`, `image`) VALUES
-(3, 'Fort Jesus', 'Mombasa', 'old ruin', 'Screenshot from 2024-08-01 17-54-09.png');
+INSERT INTO `tourist_sites` (`id`, `name`, `location`, `description`, `image`, `price`) VALUES
+(1, 'Fort Jesus', 'Nairobi', 'wonderful', '322093.jpg', 4000.00);
 
 --
 -- Indexes for dumped tables
@@ -333,7 +335,7 @@ ALTER TABLE `flight_bookings`
 -- AUTO_INCREMENT for table `hotels`
 --
 ALTER TABLE `hotels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `hotel_bookings`
@@ -369,7 +371,7 @@ ALTER TABLE `subscriptions`
 -- AUTO_INCREMENT for table `tourist_sites`
 --
 ALTER TABLE `tourist_sites`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

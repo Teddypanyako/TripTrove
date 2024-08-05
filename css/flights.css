@@ -10,86 +10,112 @@ main {
   padding: 20px;
 }
 
-h3.p1 {
-  margin-top: 0;
-}
-
-/* Section Styles */
+/* Section 1 Styles */
 .sec1 {
   background-color: palevioletred;
-  padding: 10px;
+  padding: 20px 0;
 }
 
 .nav1 ul {
   list-style-type: none;
   padding: 0;
+  text-align: center;
 }
 
-.nav1 li {
+.nav1 ul li {
   display: inline;
-  margin-right: 20px;
-  font-weight: bold;
+  margin: 0 15px;
+  font-size: 18px;
 }
 
-/* Flight Cards */
+.nav1 ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Section 2 Styles */
+.sec2 {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #ccc;
+}
+
+.sec2 .p1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Flights Section Styles */
 #flights-section {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
+  padding: 20px 0;
 }
 
 .flight {
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 15px;
-  width: calc(33% - 40px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.flight h4 {
-  margin-top: 0;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
 }
 
 .flight img {
   max-width: 100%;
-  height: auto;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
-.flight button {
+.flight h4 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.flight p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.flight a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
-.flight button:hover {
+.flight a:hover {
   background-color: #0056b3;
 }
 
 /* Footer Styles */
 footer {
   background-color: palevioletred;
-  padding: 20px;
-  margin-top: 20px;
+  color: #fff;
+  padding: 20px 0;
 }
 
 .footer-container {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .footer-section {
-  width: 23%;
+  margin: 10px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .footer-section h4 {
-  margin-top: 0;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .footer-section ul {
@@ -98,21 +124,65 @@ footer {
 }
 
 .footer-section ul li {
+  margin: 5px 0;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-section input[type="email"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   margin-bottom: 10px;
 }
 
-.footer-section a {
-  text-decoration: none;
-  color: #333;
+.footer-section button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
 }
 
-.footer-section a:hover {
-  text-decoration: underline;
+.footer-section button:hover {
+  background-color: #0056b3;
+}
+
+.footer-section .follow-us a {
+  color: #fff;
+  margin: 0 10px;
+  font-size: 24px;
 }
 
 .footer-bottom {
   text-align: center;
   margin-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+.footer-bottom a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
 }
 
 /* Modal Styles */
@@ -125,7 +195,6 @@ footer {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
   padding-top: 60px;
 }
@@ -136,14 +205,8 @@ footer {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 800px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content h4,
-.modal-content p {
-  margin: 0 0 10px;
+  max-width: 600px;
+  border-radius: 10px;
 }
 
 .close-button {
@@ -155,7 +218,23 @@ footer {
 
 .close-button:hover,
 .close-button:focus {
-  color: black;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#modal-flight-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#modal-flight-info p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#modal-image {
+  max-width: 100%;
+  border-radius: 10px;
+  margin-top: 20px;
 }

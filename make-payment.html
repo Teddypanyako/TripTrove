@@ -76,7 +76,7 @@
           const formData = new FormData(this);
 
           // Send form data to the server
-          fetch("backend/process_payment.php", {
+          fetch("process_payment.php", {
             method: "POST",
             body: formData,
           })
